@@ -1,7 +1,7 @@
 float xSeed = 10;
 float ySeed = 8;
-float xInc = 2;
-float yInc = 4;
+float xInc = 1;
+float yInc = 1;
 
 class vertex
 {
@@ -29,7 +29,7 @@ class column
     vertices = new ArrayList<vertex>();
     for(int i = 0; i < yRowCount; i++)
     {
-      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing , i * ySpacing + noise(ySeed) * ySpacing );
+      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing , i * ySpacing + noise(ySeed) * ySpacing * 2);
       vertices.add(v);
       xSeed += xInc;
       ySeed += yInc;
@@ -88,14 +88,22 @@ class GridConstructor
   public void Display()
   {
     column cPrev = grid.get(0);
-    for(int i = 1; i < grid.size(); i++)
+    for(int i = 1; i < grid.size()-1; i++)
     {
       column c = grid.get(i);
       c.Display();
-      for(int j = 0; j < c.vertices.size(); j++)
+      for(int j = 0; j < c.vertices.size()-1; j++)
       {
+        stroke(noise(xSeed) * 150 + 50);
+        xSeed+=xInc;
         line( c.vertices.get(j).x, c.vertices.get(j).y, cPrev.vertices.get(j).x, cPrev.vertices.get(j).y );
-        //Hello
+        stroke(noise(xSeed) * 150 + 50);
+        xSeed+=xInc;
+        line( c.vertices.get(j).x, c.vertices.get(j).y, c.vertices.get(j+1).x, c.vertices.get(j+1).y );
+        stroke(noise(xSeed) * 150 + 50);
+        xSeed+=xInc;
+        line( c.vertices.get(j).x, c.vertices.get(j).y, cPrev.vertices.get(j+1).x, cPrev.vertices.get(j+1).y );
+        
       }
       cPrev = c;
     }
@@ -107,9 +115,10 @@ public void setup()
 {
    size(1920,1080);
   g = new GridConstructor(80 , 30, 4);
+  g.Display();
 }
 
 public void draw()
 {
-  g.Display();
+  
 }
