@@ -94,7 +94,8 @@ class GridConstructor
       c.Display();
       for(int j = 0; j < c.vertices.size(); j++)
       {
-        line( c.vertices.get(j).x, c.vertices.get(j).y, cPrev.vertices.get(j).x, cPrev.vertices.get(j).x );
+        line( c.vertices.get(j).x, c.vertices.get(j).y, cPrev.vertices.get(j).x, cPrev.vertices.get(j).y );
+        //Hello
       }
       cPrev = c;
     }
