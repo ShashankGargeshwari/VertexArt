@@ -3,6 +3,8 @@ float ySeed = 8;
 float xInc = 1;
 float yInc = 1;
 
+String version = "Granite";
+
 class vertex
 {
   float x;
@@ -29,7 +31,7 @@ class column
     vertices = new ArrayList<vertex>();
     for(int i = 0; i < yRowCount; i++)
     {
-      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing , i * ySpacing + noise(ySeed) * ySpacing * 2);
+      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing * 1.2 , i * ySpacing + noise(ySeed) * ySpacing * 1.2);
       vertices.add(v);
       xSeed += xInc;
       ySeed += yInc;
@@ -100,7 +102,7 @@ class GridConstructor
         stroke(noise(xSeed) * 150 + 50);
         xSeed+=xInc;
         line( c.vertices.get(j).x, c.vertices.get(j).y, c.vertices.get(j+1).x, c.vertices.get(j+1).y );
-        stroke(noise(xSeed) * 150 + 50);
+        stroke(70, 70,noise(xSeed) * 50 + 200);
         xSeed+=xInc;
         line( c.vertices.get(j).x, c.vertices.get(j).y, cPrev.vertices.get(j+1).x, cPrev.vertices.get(j+1).y );
         
@@ -114,11 +116,15 @@ class GridConstructor
 public void setup()
 {
    size(1920,1080);
-  g = new GridConstructor(80 , 30, 4);
+  g = new GridConstructor(80 , 40, 4);
   g.Display();
 }
 
 public void draw()
 {
-  
+  if (keyPressed) {
+    if (key == 's' || key == 'S') {
+      save( version + year() + month() + day() + hour() + minute() + second() + millis()  );
+    }
+  }
 }
