@@ -31,7 +31,7 @@ class column
     vertices = new ArrayList<vertex>();
     for(int i = 0; i < yRowCount; i++)
     {
-      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing * 1.2 , i * ySpacing + noise(ySeed) * ySpacing * 1.2);
+      vertex v = new vertex( xLocation + noise(xSeed) * xSpacing * i/20 , i * ySpacing + noise(ySeed) * ySpacing * i/20);
       vertices.add(v);
       xSeed += xInc;
       ySeed += yInc;
